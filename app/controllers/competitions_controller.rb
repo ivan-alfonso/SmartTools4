@@ -32,17 +32,8 @@ class CompetitionsController < ApplicationController
   # POST /competitions.json
   def create
     #@competition = current_user.competitions.new(competition_params)
-    #startAnio = params["competition"]["dateStart(1i)"]
-    #startMes  = params["competition"]["dateStart(2i)"]
-    #startDia  = params["competition"]["dateStart(3i)"]
-
-    #endAnio = params["competition"]["dateEnd(1i)"]
-    #endMes  = params["competition"]["dateEnd(2i)"]
-    #endDia  = params["competition"]["dateEnd(3i)"]
 
     @competition = Competition.new(competition_params)
-    @competition.dateStart = build_date_from_params(params, 'competition', 'dateStart')
-    @competition.dateEnd = build_date_from_params(params, 'competition', 'dateEnd')
 
     respond_to do |format|
       if @competition.save
@@ -59,7 +50,7 @@ class CompetitionsController < ApplicationController
   # PATCH/PUT /competitions/1.json
   def update
     respond_to do |format|
-      if @competition.update(competition_params)
+      if @competition.update_attributes(competition_params)
         format.html { redirect_to @competition, success: 'Concurso modificado correctamente.' }
         format.json { render :show, status: :ok, location: @competition }
       else
@@ -87,6 +78,20 @@ class CompetitionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def competition_params
-      params.require(:competition).permit(:name, :url, :dateStart, :dateEnd, :prize)
+
+      paramsHASH = params.require(:competition).permit(:name, :url, :dateStart, :dateEnd, :prize)
+      dateStart = build_date_from_hash(paramsHASH, "dateStart")
+      dateEnd = build_date_from_hash(paramsHASH, "dateEnd")
+      paramsHASH.reject! {|key, value| key == "dateStart(1i)"}
+      paramsHASH.reject! {|key, value| key == "dateStart(2i)"}
+      paramsHASH.reject! {|key, value| key == "dateStart(3i)"}
+      paramsHASH.reject! {|key, value| key == "dateEnd(1i)"}
+      paramsHASH.reject! {|key, value| key == "dateEnd(2i)"}
+      paramsHASH.reject! {|key, value| key == "dateEnd(3i)"}
+      paramsHASH["dateStart"] = dateStart
+      paramsHASH["dateEnd"] = dateEnd
+
+      return paramsHASH
+
     end
 end

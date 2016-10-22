@@ -6,7 +6,6 @@ class Competition
 
 	field :name
 	field :prize
-	field :url
 	field :dateStart, :datetime
 	field :dateEnd, :datetime
 

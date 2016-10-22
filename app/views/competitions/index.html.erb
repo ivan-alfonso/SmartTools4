@@ -1,8 +1,3 @@
-
-<% if false %>
-<p id="notice"><%= notice %></p>
-<% end %> 
-
 <div class="margin-min">
   <h1 class="text-blue">Concursos</h1>
 
@@ -10,7 +5,6 @@
     <thead>
       <tr>
         <th>Nombre</th>
-        <th>Url</th>
         <th>Fecha de inicio</th>
         <th>Fecha de cierre</th>
         <th>Premio</th>
@@ -22,7 +16,6 @@
       <% @competitions.each do |competition| %>
         <tr>
           <td><%= competition.name %></td>
-          <td><%= competition.url %></td>
           <td><%= competition.dateStart.strftime('%Y/%m/%d %H:%M:%S') %></td>
           <td><%= competition.dateEnd.strftime('%Y/%m/%d %H:%M:%S') %></td>
           <td><%= competition.prize %></td>

@@ -12,4 +12,14 @@ module UtilitiesHelper
 
 	end
 
+	def build_date_from_hash(hash_params, search_date)
+
+        anio = hash_params[search_date + "(1i)"]
+        mes  = hash_params[search_date + "(2i)"]
+        dia  = hash_params[search_date + "(3i)"]		
+
+		return Date.new(anio.to_i, mes.to_i, dia.to_i)
+
+	end
+
 end

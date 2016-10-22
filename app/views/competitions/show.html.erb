@@ -5,17 +5,14 @@
 
      <div class="box text-left">
         
+         <h1 class="text-blue"><%= @competition.name %></h1>  
+
   <% if false %>
 
-         <p id="notice"><%= notice %></p>
-
-         <h1 class="text-blue"><%= @competition.name %></h1>
          <% imageCloudFront = '//d3smpe5hs8b20c.cloudfront.net/images/' + @competition.id.to_s + '/' + @competition.image_file_name.to_s %>
          <img src= <%= imageCloudFront.to_s %> alt="Fondo" style="width:80%;height:300px;">
 
   <% end %>        
-
-         <h1 class="text-blue"><%= @competition.name %></h1>  
          
          <p>
            <strong>Url del concurso:</strong>
@@ -41,11 +38,6 @@
          <%= link_to 'Atras', competitions_path, class:"btn btn-warning active" %>
 
 <% if false %> 
-
-         <% if user_signed_in? %>
-          <%= link_to 'Editar', edit_competition_path(@competition), class:"btn btn-primary active" %>
-          <%= link_to 'Atras', competitions_path, class:"btn btn-danger active" %>
-         <% end %>
 
          <div class="field">
            <br>
