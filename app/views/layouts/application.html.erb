@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+
+    <title>SmartTools 3.0</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
+    <%= csrf_meta_tags %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+  </head>
+
+  <body>
+
+	  <header>
+
+	    <nav class="be-purple white large-padding">
+
+	    	<ul class="no-list row center-xs middle-xs">
+
+          <li class="col-md no-point">
+            <h1 class="no-margin font-tittle"><b><i>Smart Tools 3.0</i></b></h1>
+          </li>
+
+  	    	<li class="col-md no-point">
+  	    		<%= link_to "Inicio", root_path, class:"btn-link" %>
+  	    	</li>
+
+          <li class="col-md no-point">
+            <%= link_to "Mis Concursos", competitions_path, class:"btn-link" %>
+          </li>
+
+
+<% if false %>        
+	   
+  	    	<% if user_signed_in? %>
+
+              <li class="col-md no-point">
+                <%= link_to "Mis Concursos", competitions_path, class:"btn-link" %>
+              </li>
+
+              <li class="col-md no-point">
+                  <%= link_to "Cerrar sesión", destroy_user_session_path, method: :delete, class:"btn-link" %>
+              </li>
+
+          <% else %>
+
+              <li class="col-md no-point">
+                  <%= link_to "Iniciar sesión", new_user_session_path, class:"btn-link" %>
+              </li>
+
+              <li class="col-md no-point">
+                  <%= link_to "Crear cuenta", new_user_registration_path, class:"btn-link" %>
+              </li>
+
+        	<% end %>
+
+<% end %>          
+
+	    	</ul>
+
+	    </nav>
+
+	</header>
+
+<% if false %>
+	<p class="notice"><%= notice %></p>
+  	<p class="alert"><%= alert %></p>
+<% end %> 
+
+    <div class="container">
+        <% flash.each do |key, value| %>
+           <div class="alert alert-<%= key %>"><%= value %></div>
+        <% end %>      
+    </div>
+
+    <%= yield %>
+    
+  </body>
+
+</html>

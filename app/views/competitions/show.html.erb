@@ -1,0 +1,90 @@
+
+<div class="row center-xs">
+
+   <div class="clo-xs-8 col-md-6">
+
+     <div class="box text-left">
+        
+  <% if false %>
+
+         <p id="notice"><%= notice %></p>
+
+         <h1 class="text-blue"><%= @competition.name %></h1>
+         <% imageCloudFront = '//d3smpe5hs8b20c.cloudfront.net/images/' + @competition.id.to_s + '/' + @competition.image_file_name.to_s %>
+         <img src= <%= imageCloudFront.to_s %> alt="Fondo" style="width:80%;height:300px;">
+
+  <% end %>        
+
+         <h1 class="text-blue"><%= @competition.name %></h1>  
+         
+         <p>
+           <strong>Url del concurso:</strong>
+           <%= request.original_url %>
+         </p>
+
+         <p>
+           <strong>Fecha de inicio:</strong>
+           <%= @competition.dateStart.strftime('%Y/%m/%d %H:%M:%S') %>
+         </p>
+
+         <p>
+           <strong>Fecha de cierre:</strong>
+           <%= @competition.dateEnd.strftime('%Y/%m/%d %H:%M:%S') %>
+         </p>
+
+         <p>
+           <strong>Premio:</strong>
+           <%= @competition.prize %>
+         </p>
+
+         <%= link_to 'Editar', edit_competition_path(@competition), class:"btn btn-primary active" %>
+         <%= link_to 'Atras', competitions_path, class:"btn btn-warning active" %>
+
+<% if false %> 
+
+         <% if user_signed_in? %>
+          <%= link_to 'Editar', edit_competition_path(@competition), class:"btn btn-primary active" %>
+          <%= link_to 'Atras', competitions_path, class:"btn btn-danger active" %>
+         <% end %>
+
+         <div class="field">
+           <br>
+           <h2 class="text-blue">Participe en el concurso</h2>
+           <%= render "videos/form" %>
+
+           <BR>
+           <h2 class="text-blue">Lista de videos</h2>
+
+           <ul>
+             <% @competition_videos.each do |video| %>
+                <% if user_signed_in? or video.estado == "Procesado" %>
+                  <br><br>
+                  <p><b>Fecha de publicación: </b><%= video.created_at %> </p>
+                  <p><b>Autor: </b> <%= video.nombreAutor + " " + video.apellidoAutor %> </p>
+                  <% unless video.estado == "En proceso" %>
+                    <video width="500" height="240" controls="controls">
+                      <source src= <%= video.videoConvertido %> >
+                        Su buscador no soporta el video-tag
+                    </video>
+
+                  <% end %>
+                  <p><b>Comentario: </b><%= video.comentario %> </p>
+                  <% if user_signed_in? %>
+                    <%= link_to "Detalles", [video.competition, video], class:"btn btn-primary active" %>
+                  <br>
+                  <% end %>
+                <% end %>
+             <% end %>
+           </ul>
+
+            <div align="center">
+              <%= will_paginate @competition_videos%>
+            </div>
+
+<% end %>             
+
+        </div>
+
+  </div>
+
+</div>

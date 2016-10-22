@@ -1,0 +1,46 @@
+
+<% if false %>
+<p id="notice"><%= notice %></p>
+<% end %> 
+
+<div class="margin-min">
+  <h1 class="text-blue">Concursos</h1>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Url</th>
+        <th>Fecha de inicio</th>
+        <th>Fecha de cierre</th>
+        <th>Premio</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @competitions.each do |competition| %>
+        <tr>
+          <td><%= competition.name %></td>
+          <td><%= competition.url %></td>
+          <td><%= competition.dateStart.strftime('%Y/%m/%d %H:%M:%S') %></td>
+          <td><%= competition.dateEnd.strftime('%Y/%m/%d %H:%M:%S') %></td>
+          <td><%= competition.prize %></td>
+          <td><%= link_to 'Ver', competition, class:"btn btn-primary active" %></td>
+          <td><%= link_to 'Editar', edit_competition_path(competition), class:"btn btn-info active" %></td>
+          <td><%= link_to 'Eliminar', competition, method: :delete, data: { confirm: 'Estas seguro de eliminar el concurso?'}, class:"btn btn-danger active" %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%= link_to 'Crear concurso', new_competition_path, class:"btn btn-success active" %>
+
+<% if false %>  
+  <br>
+  <div align="center">
+    <%= will_paginate @competitions_filter, renderer: BootstrapPagination::Rails %>
+  </div>
+  <br>
+<% end %> 
+  
+</div>
