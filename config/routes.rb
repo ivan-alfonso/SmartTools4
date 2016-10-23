@@ -5,6 +5,10 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'welcome#index'
 
+  get "/log-in" => "sessions#new"
+  post "/log-in" => "sessions#create", as: :init_session
+  delete "/log-out" => "sessions#destroy", as: :end_session
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
@@ -17,6 +21,7 @@ Rails.application.routes.draw do
   resources :competitions do
     resources :videos
   end
+  resources :users
 
   # Example resource route with options:
   #   resources :products do

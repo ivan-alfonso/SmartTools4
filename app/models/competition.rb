@@ -8,6 +8,7 @@ class Competition
 	field :prize
 	field :dateStart, :datetime
 	field :dateEnd, :datetime
+	field :user_id
 
 	#belongs_to :user
 	has_many :videos,  dependent: :destroy 
