@@ -8,8 +8,8 @@ class CompetitionsController < ApplicationController
   # GET /competitions
   # GET /competitions.json
   def index
-    @competitions = Competition.all
-    #@competitions_filter = Competition.where(" user_id = ? ",current_user.id).paginate(page: params[:page],per_page:10)
+    #@competitions = Competition.all
+    @competitions = Competition.where(:user_id => session[:user_id]).all
   end
 
   # GET /competitions/1
@@ -34,6 +34,7 @@ class CompetitionsController < ApplicationController
     #@competition = current_user.competitions.new(competition_params)
 
     @competition = Competition.new(competition_params)
+    @competition.user_id = session[:user_id]
 
     respond_to do |format|
       if @competition.save
@@ -79,7 +80,7 @@ class CompetitionsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def competition_params
 
-      paramsHASH = params.require(:competition).permit(:name, :url, :dateStart, :dateEnd, :prize)
+      paramsHASH = params.require(:competition).permit(:name, :url, :dateStart, :dateEnd, :prize, :user_id)
       dateStart = build_date_from_hash(paramsHASH, "dateStart")
       dateEnd = build_date_from_hash(paramsHASH, "dateEnd")
       paramsHASH.reject! {|key, value| key == "dateStart(1i)"}

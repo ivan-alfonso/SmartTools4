@@ -28,36 +28,27 @@
   	    		<%= link_to "Inicio", root_path, class:"btn-link" %>
   	    	</li>
 
-          <li class="col-md no-point">
-            <%= link_to "Mis Concursos", competitions_path, class:"btn-link" %>
-          </li>
+          <% if !session[:user_id] %>             
 
+              <li class="col-md no-point">
+                  <%= link_to "Iniciar sesión", init_session_path, class:"btn-link" %>
+              </li>
 
-<% if false %>        
-	   
-  	    	<% if user_signed_in? %>
+              <li class="col-md no-point">
+                  <%= link_to "Crear cuenta", new_user_path, class:"btn-link" %>
+              </li>
+          
+          <% else %>
 
               <li class="col-md no-point">
                 <%= link_to "Mis Concursos", competitions_path, class:"btn-link" %>
               </li>
 
               <li class="col-md no-point">
-                  <%= link_to "Cerrar sesión", destroy_user_session_path, method: :delete, class:"btn-link" %>
+                  <%= link_to "Cerrar sesión", end_session_path, method: :delete, class:"btn-link" %>
               </li>
 
-          <% else %>
-
-              <li class="col-md no-point">
-                  <%= link_to "Iniciar sesión", new_user_session_path, class:"btn-link" %>
-              </li>
-
-              <li class="col-md no-point">
-                  <%= link_to "Crear cuenta", new_user_registration_path, class:"btn-link" %>
-              </li>
-
-        	<% end %>
-
-<% end %>          
+          <% end %>
 
 	    	</ul>
 
