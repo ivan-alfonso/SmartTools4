@@ -15,7 +15,8 @@ class CompetitionsController < ApplicationController
   # GET /competitions/1
   # GET /competitions/1.json
   def show
-    #@video = Video.new
+    @video = Video.new
+    @competition_videos = Competition.find(params[:id]).videos
     #@competition_videos = Competition.find(params[:id]).videos.order(created_at: :desc).paginate(page: params[:page],per_page:50)
   end
 

@@ -37,7 +37,8 @@
          <%= link_to 'Editar', edit_competition_path(@competition), class:"btn btn-primary active" %>
          <%= link_to 'Atras', competitions_path, class:"btn btn-warning active" %>
 
-<% if false %> 
+
+
 
          <div class="field">
            <br>
@@ -45,37 +46,48 @@
            <%= render "videos/form" %>
 
            <BR>
+
            <h2 class="text-blue">Lista de videos</h2>
 
            <ul>
              <% @competition_videos.each do |video| %>
-                <% if user_signed_in? or video.estado == "Procesado" %>
+                <% #if user_signed_in? or video.estado == "Procesado" %>
                   <br><br>
                   <p><b>Fecha de publicación: </b><%= video.created_at %> </p>
-                  <p><b>Autor: </b> <%= video.nombreAutor + " " + video.apellidoAutor %> </p>
-                  <% unless video.estado == "En proceso" %>
+                  <p><b>Autor: </b> <%= video.nameAutor + " " + video.lastNameAutor %> </p>
+
+<% if false %>
+                  <% unless video.state == "En proceso" %>
                     <video width="500" height="240" controls="controls">
                       <source src= <%= video.videoConvertido %> >
                         Su buscador no soporta el video-tag
                     </video>
-
                   <% end %>
-                  <p><b>Comentario: </b><%= video.comentario %> </p>
+<% end %>
+
+                  <p><b>Comentario: </b><%= video.comment %> </p>
+
+
+<% if false %>
                   <% if user_signed_in? %>
                     <%= link_to "Detalles", [video.competition, video], class:"btn btn-primary active" %>
                   <br>
                   <% end %>
-                <% end %>
+<% end %>
+
+                <% #end %>
              <% end %>
            </ul>
 
+
+<% if false %>
             <div align="center">
               <%= will_paginate @competition_videos%>
             </div>
+<% end %>
 
-<% end %>             
 
-        </div>
+         </div>
 
   </div>
 

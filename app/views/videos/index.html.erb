@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Videos</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Competition</th>
+      <th>Nombreautor</th>
+      <th>Apellidoautor</th>
+      <th>Email</th>
+      <th>Comentario</th>
+      <th>Estado</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @videos.each do |video| %>
+      <tr>
+        <td><%= video.competition %></td>
+        <td><%= video.nombreAutor %></td>
+        <td><%= video.apellidoAutor %></td>
+        <td><%= video.email %></td>
+        <td><%= video.comentario %></td>
+        <td><%= video.estado %></td>\
+        <td><%= link_to 'Show', [video.competition, video] %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

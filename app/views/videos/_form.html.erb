@@ -1,0 +1,48 @@
+<%= form_for([@competition,@video]) do |f| %>
+  <% if @video.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(video.errors.count, "error") %> prohibited this video from being saved:</h2>
+
+      <ul>
+      <% video.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <h3>Datos del Autor</h3>
+
+  <div class="field">
+    <%= f.label :nameAutor, "Nombres" %>
+    <%= f.text_field :nameAutor, class:"form-control" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :lastNameAutor, "Apellidos" %>
+    <%= f.text_field :lastNameAutor, class:"form-control" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :email %>
+    <%= f.text_field :email, class:"form-control" %>
+  </div>
+
+
+<% if false %>
+
+  <div class="field">
+    <b>Video</b><%= f.file_field :videoOriginal %>
+  </div>
+
+<% end %>
+
+  <div class="field">
+    <%= f.label :comment, "Comentario del video" %>
+    <%= f.text_area :comment, class:"form-control" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Crear participación"%>
+  </div>
+<% end %>

@@ -10,7 +10,7 @@ class Competition
 	field :dateEnd, :datetime
 
 	#belongs_to :user
-	#has_many :videos,  dependent: :destroy 
+	has_many :videos,  dependent: :destroy 
 
 	validates :name, presence: true
 
