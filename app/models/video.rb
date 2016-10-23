@@ -13,10 +13,12 @@ class Video
 
 
   validates :comment, presence: true
-  #validates :videoOriginal, attachment_presence: true
-  #validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
-  belongs_to :competition
+  validates :nameAutor, presence: true
+  validates :lastNameAutor, presence: true
+  validates :email, presence: true
+  validates_format_of :email, :with => /@/
 
+  belongs_to :competition
 
   #has_attached_file :videoOriginal,
   #        :path => "original-videos/:id/:basename.:extension",

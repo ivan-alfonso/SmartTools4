@@ -6,17 +6,13 @@ class VideosController < ApplicationController
   # GET /videos
   # GET /videos.json
   def index
-    @videos = Video.all
-    @videos_no_convertidos = Video.where("state = ?", "En proceso")
   end
 
   # GET /videos/1
   # GET /videos/1.json
   def show
-    #1st you retrieve the post thanks to params[:post_id]
-    competition = Competition.find(params[:competition_id])
     #2nd you retrieve the comment thanks to params[:id]
-    @video = competition.videos.find(params[:id])
+    @video = Video.find(params[:id])
   end
 
   # GET /videos/new
@@ -81,6 +77,6 @@ class VideosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def video_params
-      params.require(:video).permit(:nameAutor, :lastNameAutor, :comment, :state, :pathVideoConverted)
+      params.require(:video).permit(:nameAutor, :lastNameAutor, :email, :comment, :state, :pathVideoConverted)
     end
 end

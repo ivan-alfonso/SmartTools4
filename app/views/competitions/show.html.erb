@@ -51,7 +51,7 @@
 
            <ul>
              <% @competition_videos.each do |video| %>
-                <% #if user_signed_in? or video.estado == "Procesado" %>
+                <% if session[:user_id] or video.state == "Procesado" %>
                   <br><br>
                   <p><b>Fecha de publicación: </b><%= video.created_at %> </p>
                   <p><b>Autor: </b> <%= video.nameAutor + " " + video.lastNameAutor %> </p>
@@ -68,14 +68,12 @@
                   <p><b>Comentario: </b><%= video.comment %> </p>
 
 
-<% if false %>
-                  <% if user_signed_in? %>
+                  <% if session[:user_id] %>
                     <%= link_to "Detalles", [video.competition, video], class:"btn btn-primary active" %>
                   <br>
                   <% end %>
-<% end %>
 
-                <% #end %>
+                <% end %>
              <% end %>
            </ul>
 

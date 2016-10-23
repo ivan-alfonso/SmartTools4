@@ -10,10 +10,11 @@ class Competition
 	field :dateEnd, :datetime
 	field :user_id
 
-	#belongs_to :user
-	has_many :videos,  dependent: :destroy 
-
+	
 	validates :name, presence: true
+	validates :prize, presence: true
+
+	has_many :videos,  dependent: :destroy 
 
 	#has_attached_file :image,
 	#				:path => "images/:id/:basename.:extension"

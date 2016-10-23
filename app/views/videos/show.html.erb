@@ -2,33 +2,33 @@
    <div class="clo-xs-8 col-md-6">
      <div class="box text-left">
 
-<% if user_signed_in? %>
-  <p id="notice"><%= notice %></p>
+<% if session[:user_id] %>
 
   <h2 class="text-blue">Datos del Autor</h2>
 
   <p>
     <strong>Nombres:</strong>
-    <%= @video.nombreAutor %>
+    <%= @video.nameAutor %>
   </p>
 
   <p>
     <strong>Apellidos:</strong>
-    <%= @video.apellidoAutor %>
+    <%= @video.lastNameAutor %>
   </p>
-
-<%# videoToConvert = Rails.root.join("public") %>
-<%#      movie = FFMPEG::Movie.new(videoToConvert.to_s + @video.videoOriginal.to_s) %>
 
   <p>
     <strong>Email:</strong>
     <%= @video.email %>
   </p>
 
+<% if false %>
+
   <video width="500" height="240" controls="controls">
     <source src= "<%= @video.videoOriginal %>" >
      Su buscador no soporta el video-tag
   </video>
+
+<% end %>
 
   <p>
     <strong>Fecha de creación:</strong>
@@ -37,16 +37,16 @@
 
   <p>
     <strong>Estado del video:</strong>
-    <%= @video.estado %>
+    <%= @video.state %>
   </p>
 
   <p>
     <strong>Comentario:</strong>
-    <%= @video.comentario %>
+    <%= @video.comment %>
   </p>
 <% end %>
 
-<%= link_to "Atras", @competition, class:"btn btn-danger active" %>
+<%= link_to "Atras", @competition, class:"btn btn-warning active" %>
 
     </div>
   </div>
