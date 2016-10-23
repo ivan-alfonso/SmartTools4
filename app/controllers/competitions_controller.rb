@@ -105,7 +105,13 @@ class CompetitionsController < ApplicationController
     def upload_image( competition_id, image_object )
         
         image_file_name = competition_id.to_s + "-" + image_object.original_filename.to_s
-        uploaded_image_file = Rails.root.join('public','uploaded-files', image_file_name)
+        path_uploaded_image = Rails.root.join('public','uploaded-files')
+        uploaded_image_file = path_uploaded_image.to_s + "/" + image_file_name
+
+         unless Dir.exist?(path_uploaded_image)
+            FileUtils.mkdir_p(path_uploaded_image)
+         end
+
         File.open(uploaded_image_file, 'wb') do |file|
           file.write(image_object.read)
         end        
