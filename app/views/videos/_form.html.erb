@@ -1,7 +1,7 @@
 <%= form_for([@competition,@video]) do |f| %>
   <% if @video.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(video.errors.count, "error") %> prohibited this video from being saved:</h2>
+      <h2><%= pluralize(video.errors.count, "error") %> La carga de video tiene errores por favor corrijalos:</h2>
 
       <ul>
       <% video.errors.full_messages.each do |message| %>
@@ -14,28 +14,23 @@
   <h3>Datos del Autor</h3>
 
   <div class="field">
-    <%= f.label :nameAutor, "Nombres" %>
-    <%= f.text_field :nameAutor, class:"form-control" %>
+    <%= f.label :name_autor, "Nombres" %>
+    <%= f.text_field :name_autor, class:"form-control" %>
   </div>
 
   <div class="field">
-    <%= f.label :lastNameAutor, "Apellidos" %>
-    <%= f.text_field :lastNameAutor, class:"form-control" %>
+    <%= f.label :last_name_autor, "Apellidos" %>
+    <%= f.text_field :last_name_autor, class:"form-control" %>
   </div>
 
   <div class="field">
-    <%= f.label :email %>
-    <%= f.text_field :email, class:"form-control" %>
+    <%= f.label :email_autor %>
+    <%= f.text_field :email_autor, class:"form-control" %>
   </div>
-
-
-<% if false %>
 
   <div class="field">
-    <b>Video</b><%= f.file_field :videoOriginal %>
+    <b>Video</b><%= f.file_field :video_file %>
   </div>
-
-<% end %>
 
   <div class="field">
     <%= f.label :comment, "Comentario del video" %>

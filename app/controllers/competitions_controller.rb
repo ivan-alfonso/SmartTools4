@@ -1,6 +1,8 @@
+require 'fileutils'
+
 class CompetitionsController < ApplicationController
 
-  include UtilitiesHelper
+  include UtilitiesHelper, AwsSqsHelper
 
   before_action :set_competition, only: [:show, :edit, :update, :destroy]
   #before_action :authenticate_user!, except: [:show, :index]
@@ -32,13 +34,16 @@ class CompetitionsController < ApplicationController
   # POST /competitions
   # POST /competitions.json
   def create
-    #@competition = current_user.competitions.new(competition_params)
-
+    
+    @image_object = params[:competition][:image_file]
     @competition = Competition.new(competition_params)
-    @competition.user_id = session[:user_id]
+    @competition.user_id = session[:user_id]    
+    @competition.image_original_filename = @image_object.original_filename.to_s
+    @competition.image_content_type = @image_object.content_type.to_s
 
     respond_to do |format|
       if @competition.save
+        upload_image(@competition.id, @image_object)
         format.html { redirect_to @competition, success: 'Concurso creado correctamente.' }
         format.json { render :show, status: :created, location: @competition }
       else
@@ -96,4 +101,20 @@ class CompetitionsController < ApplicationController
       return paramsHASH
 
     end
+
+    def upload_image( competition_id, image_object )
+        
+        image_file_name = competition_id.to_s + "-" + image_object.original_filename.to_s
+        uploaded_image_file = Rails.root.join('public','uploaded-files', image_file_name)
+        File.open(uploaded_image_file, 'wb') do |file|
+          file.write(image_object.read)
+        end        
+
+        image_on_s3 = "images/" + image_file_name
+        upload_file_to_aws_s3(uploaded_image_file, image_on_s3)
+
+        FileUtils.rm(uploaded_image_file.to_s)
+
+    end
+    
 end

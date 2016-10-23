@@ -4,24 +4,23 @@ class Video
 
   table :name => :videos, :key => :id, :read_capacity => 5, :write_capacity => 5  
 
-  field :nameAutor
-  field :lastNameAutor
-  field :email
+  field :name_autor
+  field :last_name_autor
+  field :email_autor
   field :comment
   field :state, :string, {default: 'En proceso'}
-  field :pathVideoConverted
+  field :url_converted_video
+  field :video_original_filename
+  field :video_content_type  
 
+  attr_accessor :video_file
 
   validates :comment, presence: true
-  validates :nameAutor, presence: true
-  validates :lastNameAutor, presence: true
-  validates :email, presence: true
-  validates_format_of :email, :with => /@/
+  validates :name_autor, presence: true
+  validates :last_name_autor, presence: true
+  validates :email_autor, presence: true
+  validates_format_of :email_autor, :with => /@/
 
   belongs_to :competition
 
-  #has_attached_file :videoOriginal,
-  #        :path => "original-videos/:id/:basename.:extension",
-  #        :processors => lambda { |a| a.is_video? ? [ :ffmpeg ] : [ :thumbnail ] }
-  #validates_attachment_content_type :videoOriginal, content_type: /\Avideo\/.*\Z/ 
 end

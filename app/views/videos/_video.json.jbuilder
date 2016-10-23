@@ -1,2 +1,2 @@
-json.extract! video, :id, :competition_id, :nameAutor, :lastNameAutor, :email, :comment, :state, :pathVideoConverted
+json.extract! video, :id, :competition_id, :name_autor, :last_name_autor, :email_autor, :comment, :state, :url_converted_video, :video_file, :video_original_filename, :video_content_type
 json.url video_url(video, format: :json)

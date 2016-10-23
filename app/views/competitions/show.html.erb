@@ -7,13 +7,9 @@
         
          <h1 class="text-blue"><%= @competition.name %></h1>  
 
-  <% if false %>
-
-         <% imageCloudFront = '//d3smpe5hs8b20c.cloudfront.net/images/' + @competition.id.to_s + '/' + @competition.image_file_name.to_s %>
+         <% imageCloudFront = ENV['AWS_CLOUD_FRONT'] + 'images/' + @competition.id.to_s + '-' + @competition.image_original_filename.to_s %>
          <img src= <%= imageCloudFront.to_s %> alt="Fondo" style="width:80%;height:300px;">
-
-  <% end %>        
-         
+       
          <p>
            <strong>Url del concurso:</strong>
            <%= request.original_url %>
@@ -37,9 +33,6 @@
          <%= link_to 'Editar', edit_competition_path(@competition), class:"btn btn-primary active" %>
          <%= link_to 'Atras', competitions_path, class:"btn btn-warning active" %>
 
-
-
-
          <div class="field">
            <br>
            <h2 class="text-blue">Participe en el concurso</h2>
@@ -54,22 +47,19 @@
                 <% if session[:user_id] or video.state == "Procesado" %>
                   <br><br>
                   <p><b>Fecha de publicación: </b><%= video.created_at %> </p>
-                  <p><b>Autor: </b> <%= video.nameAutor + " " + video.lastNameAutor %> </p>
+                  <p><b>Autor: </b> <%= video.name_autor + " " + video.last_name_autor %> </p>
 
-<% if false %>
                   <% unless video.state == "En proceso" %>
                     <video width="500" height="240" controls="controls">
-                      <source src= <%= video.videoConvertido %> >
+                      <source src= <%= video.url_converted_video %> >
                         Su buscador no soporta el video-tag
                     </video>
                   <% end %>
-<% end %>
 
                   <p><b>Comentario: </b><%= video.comment %> </p>
 
-
                   <% if session[:user_id] %>
-                    <%= link_to "Detalles", [video.competition, video], class:"btn btn-primary active" %>
+                    <%= link_to " Ver Detalles", [video.competition, video], class:"btn btn-primary active" %>
                   <br>
                   <% end %>
 
@@ -83,7 +73,6 @@
               <%= will_paginate @competition_videos%>
             </div>
 <% end %>
-
 
          </div>
 
