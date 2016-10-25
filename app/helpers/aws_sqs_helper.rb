@@ -2,6 +2,7 @@ require 'aws-sdk'
 
 module AwsSqsHelper
 
+    # envia mensajes a una cola de aws
 	def send_msg_to_queue(message)
 		Rails.logger.info(" #{Time.now} Ide video: " + message)
 		Rails.logger.info(" #{Time.now} url sqs: " + ENV['AWS_SQS_ORIGINAL_VIDEOS'])
@@ -9,17 +10,20 @@ module AwsSqsHelper
 		resp = sqs.send_message(queue_url: ENV['AWS_SQS_ORIGINAL_VIDEOS'], message_body: message)
 	end
 
+    # obtiene un mensaje de una cola de aws
 	def obtain_message_from_queue
 		sqs = Aws::SQS::Client.new(region: ENV['AWS_REGION'])
 		resp = sqs.receive_message(queue_url: ENV['AWS_SQS_ORIGINAL_VIDEOS'], max_number_of_messages: 1)
 		return resp.messages
 	end
 
+    # elimina un mensaje de una cola aws
 	def delete_message_from_queue(receipt_handle)
 		sqs = Aws::SQS::Client.new(region: ENV['AWS_REGION'])
 		resp = sqs.delete_message(queue_url: ENV['AWS_SQS_ORIGINAL_VIDEOS'], receipt_handle: receipt_handle)
 	end	
 
+    # sube un archivo a s3
 	def upload_file_to_aws_s3(file_to_upload, file_on_s3)
 
         s3 = Aws::S3::Resource.new(
@@ -36,6 +40,7 @@ module AwsSqsHelper
 
 	end
 
+    # descarga un archivo de s3
 	def download_file_from_aws_s3(file_to_download, file_on_local)
 
         s3 = Aws::S3::Resource.new(

@@ -2,7 +2,7 @@ require 'fileutils'
 
 class VideosController < ApplicationController
 
-  include AwsSqsHelper
+  include UtilitiesHelper
 
   before_action :set_video, only: [:show, :edit, :update, :destroy]
   before_action :set_competition
@@ -40,7 +40,7 @@ class VideosController < ApplicationController
 
     respond_to do |format|
       if @video.save
-        upload_video(@video.id, @video_object)
+        upload_file(@video.id, @video_object, "original-videos")
         send_msg_to_queue(@video.id.to_s)
         format.html { redirect_to @video.competition, success: 'Hemos recibido tu video y lo estamos procesando para que sea publicado. Tan pronto el video quede publicado en la página del concurso te notificaremos por email. Gracias.' }
         format.json { render :show, status: :created, location: @video }
@@ -87,21 +87,6 @@ class VideosController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def video_params
       params.require(:video).permit(:name_autor, :last_name_autor, :email_autor, :comment, :state, :url_converted_video)
-    end
-
-    def upload_video( video_id, video_object )
-        
-        video_file_name = video_id.to_s + "-" + video_object.original_filename.to_s
-        uploaded_video_file = Rails.root.join('public','uploaded-files', video_file_name)
-        File.open(uploaded_video_file, 'wb') do |file|
-          file.write(video_object.read)
-        end        
-
-        video_on_s3 = "original-videos/" + video_file_name
-        upload_file_to_aws_s3(uploaded_video_file, video_on_s3)
-
-        FileUtils.rm(uploaded_video_file.to_s)
-
     end
 
 end
