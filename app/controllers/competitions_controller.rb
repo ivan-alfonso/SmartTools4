@@ -5,14 +5,11 @@ class CompetitionsController < ApplicationController
   include UtilitiesHelper
 
   before_action :set_competition, only: [:show, :edit, :update, :destroy]
-  #before_action :authenticate_user!, except: [:show, :index]
+  before_action :authenticate_user, except: [:show]
 
   # GET /competitions
   # GET /competitions.json
   def index
-    if !session[:user_id]
-       redirect_to init_session_path
-    end  
     @competitions = Competition.where(:user_id => session[:user_id]).all
   end
 
@@ -102,6 +99,12 @@ class CompetitionsController < ApplicationController
 
       return paramsHASH
 
+    end
+
+    def authenticate_user
+      if !session[:user_id]
+         redirect_to init_session_path
+      end        
     end
     
 end

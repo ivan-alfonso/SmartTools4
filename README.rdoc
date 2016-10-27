@@ -1,28 +1,34 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+SmartTools 3.0 is an application that converts videos from different formats to mp4
 
 Things you may want to cover:
 
 * Ruby version
 
+2.3.1
+
 * System dependencies
+
+rails 4.2.7.1
+dynamoid 1.2.1
+aws-sdk 2.6.9
+bootstrap-sass
+puma 
 
 * Configuration
 
+You must run bundle install
+
 * Database creation
+
+SmartTools 3.0 uses DynamoDB from Amazon AWS
 
 * Database initialization
 
-* How to run the test suite
+You must create the tables on DynamoDB with the namespace dynamoid_smarttools
 
 * Services (job queues, cache servers, search engines, etc.)
 
-* Deployment instructions
+SmartTools 3.0 uses services on Amazon AWS services like S3, SQS, CloudFront, SES
 
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
