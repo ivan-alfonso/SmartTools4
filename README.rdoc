@@ -1,6 +1,6 @@
 == README
 
-SmartTools 3.0 is an application that converts videos from different formats to mp4
+SmartTools 4.0 is an application that converts videos from different formats to mp4
 
 Things you may want to cover:
 
