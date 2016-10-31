@@ -44,6 +44,8 @@ Rails.application.configure do
   user_name:            ENV['SMTP_USER_NAME'],
   password:             ENV['SMTP_USER_PASSWORD'],
   authentication:       'plain',
-  enable_starttls_auto: true  }
+  enable_starttls_auto: true  }  
+
+  config.logger = RemoteSyslogLogger.new('logs4.papertrailapp.com', 52836)
 
 end
