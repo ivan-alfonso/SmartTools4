@@ -36,7 +36,6 @@ gem 'dynamoid', '~> 1.1'
 gem 'bootstrap-sass'
 gem 'streamio-ffmpeg'
 gem 'remote_syslog_logger'
-gem 'bundler'
 gem 'sendgrid-ruby'
 
 group :development, :test do
