@@ -97,7 +97,7 @@ Rails.application.configure do
   :enable_starttls_auto => true
   }
 
-
+=begin
   config.cache_store = :dalli_store,
                     (ENV["MEMCACHIER_SERVERS"] || "").split(","),
                     {:username => ENV["MEMCACHIER_USERNAME"],
@@ -107,7 +107,7 @@ Rails.application.configure do
                      :socket_failure_delay => 0.2,
                      :down_retry_delay => 60
                     }
-                    
+=end
 
   config.logger = RemoteSyslogLogger.new('logs4.papertrailapp.com', 52836)
 end
