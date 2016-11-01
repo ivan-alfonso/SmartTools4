@@ -45,10 +45,6 @@
     <%= @video.comment %>
   </p>
 
-
-<% VideoConvertedMailer.notify(@video).deliver %>
-
-  
 <% end %>
 
 <%= link_to "Atras", @competition, class:"btn btn-warning active" %>
