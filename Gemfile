@@ -37,7 +37,7 @@ gem 'bootstrap-sass'
 gem 'streamio-ffmpeg'
 gem 'remote_syslog_logger'
 gem 'sendgrid-ruby'
-gem 'dalli'
+#gem 'dalli'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
