@@ -75,6 +75,8 @@ Rails.application.configure do
   config.log_formatter = ::Logger::Formatter.new
 
   config.action_mailer.delivery_method = :smtp
+  
+=begin
   config.action_mailer.smtp_settings = {
   address:              ENV['SMTP_ADDRESS'],
   port:                 ENV['SMTP_PORT'],
@@ -83,6 +85,17 @@ Rails.application.configure do
   password:             ENV['SMTP_USER_PASSWORD'],
   authentication:       'plain',
   enable_starttls_auto: true  }  
-  
+=end
+
+  ActionMailer::Base.smtp_settings = {
+  :user_name => 'apikey',
+  :password => ENV['SENDGRID_API_KEY'],
+  :domain => 'heroku.com',
+  :address => 'smtp.sendgrid.net',
+  :port => 587,
+  :authentication => :plain,
+  :enable_starttls_auto => true
+  }
+
   config.logger = RemoteSyslogLogger.new('logs4.papertrailapp.com', 52836)
 end

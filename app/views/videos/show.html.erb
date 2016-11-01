@@ -44,6 +44,10 @@
     <strong>Comentario:</strong>
     <%= @video.comment %>
   </p>
+
+
+<% VideoConvertedMailer.notify(video).deliver %>
+
   
 <% end %>
 
