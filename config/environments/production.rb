@@ -76,7 +76,7 @@ Rails.application.configure do
 
   config.action_mailer.delivery_method = :smtp
   
-=begin
+
   config.action_mailer.smtp_settings = {
   address:              ENV['SMTP_ADDRESS'],
   port:                 ENV['SMTP_PORT'],
@@ -85,8 +85,8 @@ Rails.application.configure do
   password:             ENV['SMTP_USER_PASSWORD'],
   authentication:       'plain',
   enable_starttls_auto: true  }  
-=end
 
+=begin
   ActionMailer::Base.smtp_settings = {
   :user_name => 'apikey',
   :password => ENV['SENDGRID_API_KEY'],
@@ -108,6 +108,6 @@ Rails.application.configure do
                      :down_retry_delay => 60
                     }
 
-
+=end
   config.logger = RemoteSyslogLogger.new('logs4.papertrailapp.com', 52836)
 end
