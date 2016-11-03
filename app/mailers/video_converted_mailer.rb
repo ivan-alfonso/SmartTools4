@@ -5,6 +5,6 @@ class VideoConvertedMailer < ApplicationMailer
     @video = video
 
     Rails.logger.info("video #{Time.now} " + video.email_autor)    
-    mail to: video.email_autor, subject: 'SmartTools 3.0: Has participado en un concurso'
+    mail to: video.email_autor, subject: 'SmartTools 4.0: Has participado en un concurso'
   end
 end
