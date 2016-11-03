@@ -42,7 +42,7 @@ class CompetitionsController < ApplicationController
 
     respond_to do |format|
       if @competition.save
- #       upload_file(@competition.id, @image_object, "images")
+        upload_file(@competition.id, @image_object, "images")
         format.html { redirect_to @competition, success: 'Concurso creado correctamente.' }
         format.json { render :show, status: :created, location: @competition }
       else

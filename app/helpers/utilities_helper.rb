@@ -31,7 +31,8 @@ module UtilitiesHelper
         
         file_name = id_object.to_s + "-" + file_to_upload.original_filename.to_s
         path_uploaded_files = Rails.root.join('public','uploaded-files')
-        uploaded_file = path_uploaded_files.to_s + "/" + file_name
+        #uploaded_file = path_uploaded_files.to_s + "/" + file_name
+        uploaded_file = Rails.root.join(file_name)
 
          unless Dir.exist?(path_uploaded_files)
             FileUtils.mkdir_p(path_uploaded_files)
@@ -45,17 +46,6 @@ module UtilitiesHelper
         upload_file_to_aws_s3(uploaded_file, file_on_s3)
 
         FileUtils.rm(uploaded_file.to_s)
-
-=begin
-                s3 = Aws::S3::Resource.new(
-            credentials: Aws::Credentials.new(ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']),
-            region: ENV['AWS_REGION']
-        )
-file_to_upload = Rails.root.join('public','PortadaImag','Im1.jpg')
-        obj = s3.bucket(ENV['S3_BUCKET_NAME']).object('images/imageprueba')
-        obj.upload_file(file_to_upload, acl:'public-read')
-        obj.public_url
-=end
 
     end
 
