@@ -6,10 +6,10 @@
      <div class="box text-left">
         
          <h1 class="text-blue"><%= @competition.name %></h1>  
-
+<%if false%>
          <% imageCloudFront = ENV['AWS_CLOUD_FRONT'] + 'images/' + @competition.id.to_s + '-' + @competition.image_original_filename.to_s %>
          <img src= <%= imageCloudFront.to_s %> alt="Fondo" style="width:80%;height:300px;">
-       
+<%end%>       
          <p>
            <strong>Url del concurso:</strong>
            <%= request.original_url %>

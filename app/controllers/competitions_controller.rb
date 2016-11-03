@@ -33,16 +33,16 @@ class CompetitionsController < ApplicationController
   # POST /competitions
   # POST /competitions.json
   def create
-    
-    @image_object = params[:competition][:image_file]
+
+#    @image_object = params[:competition][:image_file]
     @competition = Competition.new(competition_params)
     @competition.user_id = session[:user_id]    
-    @competition.image_original_filename = @image_object.original_filename.to_s
-    @competition.image_content_type = @image_object.content_type.to_s
+#    @competition.image_original_filename = @image_object.original_filename.to_s
+#    @competition.image_content_type = @image_object.content_type.to_s
 
     respond_to do |format|
       if @competition.save
-        upload_file(@competition.id, @image_object, "images")
+#        upload_file(@competition.id, @image_object, "images")
         format.html { redirect_to @competition, success: 'Concurso creado correctamente.' }
         format.json { render :show, status: :created, location: @competition }
       else
