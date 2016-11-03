@@ -49,8 +49,8 @@ class CompetitionsController < ApplicationController
             credentials: Aws::Credentials.new(ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']),
             region: ENV['AWS_REGION']
         )
-file_to_upload = Rails.root.join('public','PortadaImag','images/Im1.jpg')
-        obj = s3.bucket(ENV['S3_BUCKET_NAME']).object('imagee')
+file_to_upload = Rails.root.join('public','PortadaImag','Im1.jpg')
+        obj = s3.bucket(ENV['S3_BUCKET_NAME']).object('images/imageprueba')
         obj.upload_file(file_to_upload, acl:'public-read')
         obj.public_url
 
