@@ -1,5 +1,4 @@
 require 'fileutils'
-require 'aws-sdk'
 
 class CompetitionsController < ApplicationController
 
@@ -35,27 +34,14 @@ class CompetitionsController < ApplicationController
   # POST /competitions.json
   def create
 
- #   @image_object = params[:competition][:image_file]
+    @image_object = params[:competition][:image_file]
     @competition = Competition.new(competition_params)
     @competition.user_id = session[:user_id]    
- #   @competition.image_original_filename = @image_object.original_filename.to_s
- #   @competition.image_content_type = @image_object.content_type.to_s
+    @competition.image_original_filename = @image_object.original_filename.to_s
+    @competition.image_content_type = @image_object.content_type.to_s
 
     respond_to do |format|
       if @competition.save
-
-
-        s3 = Aws::S3::Resource.new(
-            credentials: Aws::Credentials.new(ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']),
-            region: ENV['AWS_REGION']
-        )
-file_to_upload = Rails.root.join('public','PortadaImag','Im1.jpg')
-        obj = s3.bucket(ENV['S3_BUCKET_NAME']).object('images/imageprueba')
-        obj.upload_file(file_to_upload, acl:'public-read')
-        obj.public_url
-
-
-
  #       upload_file(@competition.id, @image_object, "images")
         format.html { redirect_to @competition, success: 'Concurso creado correctamente.' }
         format.json { render :show, status: :created, location: @competition }

@@ -9,10 +9,10 @@ class Competition
 	field :dateStart, :datetime
 	field :dateEnd, :datetime
 	field :user_id
-#	field :image_original_filename
-#	field :image_content_type
+	field :image_original_filename
+	field :image_content_type
 	
-#    attr_accessor :image_file
+    attr_accessor :image_file
 	
 	validates :name, presence: true
 	validates :prize, presence: true
