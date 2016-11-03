@@ -42,7 +42,8 @@ module UtilitiesHelper
         end        
 
         file_on_s3 = folder_on_s3 + "/" + file_name
-        upload_file_to_aws_s3(uploaded_file, file_on_s3)
+        #upload_file_to_aws_s3(uploaded_file, file_on_s3)
+        upload_file_to_aws_s3(uploaded_file, file_name)
 
         FileUtils.rm(uploaded_file.to_s)
 

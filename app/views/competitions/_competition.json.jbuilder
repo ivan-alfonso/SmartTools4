@@ -1,2 +1,2 @@
-json.extract! competition, :id, :name, :url, :dateStart, :dateEnd, :prize, :created_at, :updated_at, :user_id, #:image_file, :image_original_filename, :image_content_type
+json.extract! competition, :id, :name, :url, :dateStart, :dateEnd, :prize, :created_at, :updated_at, :user_id, :image_file, :image_original_filename, :image_content_type
 json.url competition_url(competition, format: :json)
