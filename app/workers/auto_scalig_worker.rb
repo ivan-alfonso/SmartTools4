@@ -8,7 +8,7 @@ class AutoScaligWorker
   	
 #  	HEROKU_API_KEY = ENV['API_KEY']
 	heroku = Heroku::API.new(:api_key => ENV['API_KEY'])
-
+	heroku.get_ps(smarttools4)
 	heroku.post_ps_scale(APP, 'worker', 2)
 
 =begin

@@ -12,6 +12,9 @@ class CompetitionsController < ApplicationController
   # GET /competitions.json
   def index
     @competitions = Competition.where(:user_id => session[:user_id]).all
+
+  heroku = Heroku::API.new(:api_key => ENV['API_KEY'])
+  heroku.post_ps_scale(SMARTTOOLS4, 'worker', 2)
   end
 
   # GET /competitions/1
@@ -19,11 +22,6 @@ class CompetitionsController < ApplicationController
   def show
     @video = Video.new
     @competition_videos = Competition.find(params[:id]).videos
-
-
-  heroku = Heroku::API.new(:api_key => ENV['API_KEY'])
-  heroku.get_ps(smarttools4)
-
     #@competition_videos = Competition.find(params[:id]).videos.order(created_at: :desc).paginate(page: params[:page],per_page:50)
   end
 
