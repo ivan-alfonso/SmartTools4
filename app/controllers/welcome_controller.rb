@@ -1,5 +1,5 @@
 class WelcomeController < ApplicationController
-  include UtilitiesHelper
+  include AwsSqsHelper
   
   def index
   	@NumeroMensajesSQS = count_messages_from_queue()
