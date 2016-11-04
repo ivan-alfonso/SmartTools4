@@ -23,6 +23,16 @@ module AwsSqsHelper
 		resp = sqs.delete_message(queue_url: ENV['AWS_SQS_ORIGINAL_VIDEOS'], receipt_handle: receipt_handle)
 	end	
 
+	# obtiene el numero de mensajes que hay en la cola SQS
+	def count_messages_from_queue()
+		sqs = Aws::SQS::Client.new(region: ENV['AWS_REGION'])
+		resp = sqs.get_queue_attributes({
+      		queue_url: ENV['AWS_SQS_ORIGINAL_VIDEOS'],
+      		attribute_names: ["ApproximateNumberOfMessages"],
+    	})
+		return resp.attributes["ApproximateNumberOfMessages"]
+	end
+
     # sube un archivo a s3
 	def upload_file_to_aws_s3(file_to_upload, file_on_s3)
 
