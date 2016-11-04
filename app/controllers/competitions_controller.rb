@@ -15,7 +15,7 @@ class CompetitionsController < ApplicationController
 
   heroku = Heroku::API.new(:api_key => ENV['API_KEY'])
 
-  #heroku.post_ps_scale(SMARTTOOLS4, 'worker', 2)
+  heroku.post_ps_scale('smarttools4', 'worker', 2)
   end
 
   # GET /competitions/1
