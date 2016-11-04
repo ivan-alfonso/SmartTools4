@@ -6,34 +6,25 @@ class AutoScaligWorker
 
   def perform 
   	
-	heroku = Heroku::API.new(:api_key => ENV['API_KEY'])
+    heroku = Heroku::API.new(:api_key => ENV['API_KEY'])
 
-  numeroMensajesSQS = count_messages_from_queue().to_i
+    numeroMensajesSQS = count_messages_from_queue().to_i
 
-  if ( numeroMensajesSQS < 3 )
-	   heroku.post_ps_scale('smarttools4', 'worker', 1)
-  end
+    if ( numeroMensajesSQS < 3 )
+	     heroku.post_ps_scale('smarttools4', 'worker', 1)
+    end
 
-=begin
-	q = queued_events_count.to_i
-	if q > 2000
-  	
-  		if workers_count < 20
-    	# increase workers to 20 when the queue is very large
-    	heroku.post_ps_scale(APP, 'worker', 20)
-    	# Do other stuff, such as notify PagerDuty
-  		end
-	
-	elsif (q <= 2000 && q > 1000)
-  		
-  		if workers_count != 12
-  		# If workers are less than or greater than 12, scale them to 12
-  		heroku.post_ps_scale(APP, 'worker', 12)
-  		end
-	
-	#elsif ...
-	#end
-=end
+    elsif ( numeroMensajesSQS < 5 )
+        heroku.post_ps_scale('smarttools4', 'worker', 2)
+    end
+
+    elsif ( numeroMensajesSQS < 7 )
+        heroku.post_ps_scale('smarttools4', 'worker', 3)
+    end
+
+    elsif ( numeroMensajesSQS > 6 )
+        heroku.post_ps_scale('smarttools4', 'worker', 4)
+    end
 
   end
 
