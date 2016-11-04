@@ -1,1 +1,1 @@
-worker:  rake video_conversor_batch
+worker:  rake script_worker_autoscaling
