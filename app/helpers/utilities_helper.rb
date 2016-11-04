@@ -30,8 +30,7 @@ module UtilitiesHelper
     def upload_file( id_object, file_to_upload, folder_on_s3 )
         
         file_name = id_object.to_s + "-" + file_to_upload.original_filename.to_s
-        #path_uploaded_files = Rails.root.join('public','uploaded-files')
-        path_uploaded_files = Rails.root.join('tmp','uploaded-files')
+        path_uploaded_files = Rails.root.join('public','uploaded-files')
         uploaded_file = path_uploaded_files.to_s + "/" + file_name
 
          unless Dir.exist?(path_uploaded_files)
