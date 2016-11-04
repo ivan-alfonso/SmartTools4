@@ -6,9 +6,8 @@ class AutoScaligWorker
 
   def perform 
   	
-  	HEROKU_API_KEY = ENV['API_KEY']
-  	print HEROKU_API_KEY
-#	heroku = Heroku::API.new(:api_key => HEROKU_API_KEY)
+#  	HEROKU_API_KEY = ENV['API_KEY']
+	heroku = Heroku::API.new(:api_key => ENV['API_KEY'])
 
 	#heroku.post_ps_scale(APP, 'worker', 2)
 
