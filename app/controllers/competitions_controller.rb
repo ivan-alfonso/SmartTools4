@@ -14,7 +14,8 @@ class CompetitionsController < ApplicationController
     @competitions = Competition.where(:user_id => session[:user_id]).all
 
   heroku = Heroku::API.new(:api_key => ENV['API_KEY'])
-  heroku.post_ps_scale(SMARTTOOLS4, 'worker', 2)
+
+  #heroku.post_ps_scale(SMARTTOOLS4, 'worker', 2)
   end
 
   # GET /competitions/1
