@@ -10,10 +10,11 @@ class AutoScaligWorker
 
     numeroMensajesSQS = count_messages_from_queue().to_i
 
-    if ( numeroMensajesSQS < 3 )
+    if ( numeroMensajesSQS == 2 )
 	     heroku.post_ps_scale('smarttools4', 'worker', 0)
     end
 
+=begin
     elsif ( numeroMensajesSQS < 5 )
         heroku.post_ps_scale('smarttools4', 'worker', 2)
     end
@@ -25,6 +26,7 @@ class AutoScaligWorker
     elsif ( numeroMensajesSQS > 6 )
         heroku.post_ps_scale('smarttools4', 'worker', 4)
     end
+=end
 
   end
 
