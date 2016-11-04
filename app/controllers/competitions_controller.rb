@@ -1,5 +1,4 @@
 require 'fileutils'
-require 'heroku-api'
 
 class CompetitionsController < ApplicationController
 
@@ -12,10 +11,6 @@ class CompetitionsController < ApplicationController
   # GET /competitions.json
   def index
     @competitions = Competition.where(:user_id => session[:user_id]).all
-
-  heroku = Heroku::API.new(:api_key => ENV['API_KEY'])
-
-  heroku.post_ps_scale('smarttools4', 'worker', 2)
   end
 
   # GET /competitions/1
