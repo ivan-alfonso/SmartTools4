@@ -2,14 +2,14 @@ require 'heroku-api'
 
 class AutoScaligWorker
   
-  include AwsSqsHelper
+  #include AwsSqsHelper
 
   def perform 
   	
 #  	HEROKU_API_KEY = ENV['API_KEY']
 	heroku = Heroku::API.new(:api_key => ENV['API_KEY'])
-	heroku.get_ps(smarttools4)
-	heroku.post_ps_scale(APP, 'worker', 2)
+	#heroku.get_ps(smarttools4)
+	heroku.post_ps_scale(smarttools4, 'worker', 2)
 
 =begin
 	q = queued_events_count.to_i
