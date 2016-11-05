@@ -1,0 +1,1 @@
+worker: rake script_worker_autoscaling
