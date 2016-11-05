@@ -40,6 +40,7 @@ gem 'sendgrid-ruby'
 gem 'dalli'
 gem 'rufus-scheduler'
 gem 'heroku-api'
+gem 'scout_apm'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
