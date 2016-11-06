@@ -8,8 +8,8 @@ class SessionsController < ApplicationController
     if @user
       session[:user_id] = @user.id
       Rails.cache.write("user_id", @user.id)
-      flash[:success] = "Has iniciado sesión " + @user.name + " " + @user.last_name
-      #flash[:success] = "Has iniciado sesión " + @user.name + " " + @user.last_name + " id:" + Rails.cache.read("foo")
+      #flash[:success] = "Has iniciado sesión " + @user.name + " " + @user.last_name
+      flash[:success] = "Has iniciado sesión " + @user.name + " " + @user.last_name + " id:" + Rails.cache.read("user_id")
       redirect_to "/"
     else      
       flash[:danger] = "Lo sentimos, no has podido iniciar sesión, verifica tus credenciales"
