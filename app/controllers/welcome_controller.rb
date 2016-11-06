@@ -10,7 +10,7 @@ class WelcomeController < ApplicationController
 	@iptest = ip.ip_address
 
 
-@sock1 = socket.ip_address_list.detect{|intf| intf.ipv4_loopback?}
+@sock1 = Socket.ip_address_list.detect{|intf| intf.ipv4_loopback?}
 
 
 
