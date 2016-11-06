@@ -1,6 +1,6 @@
 require 'heroku-api'
 
-class AutoScaligWorker
+class AutoScalingWorker
   
   include AwsSqsHelper
 
