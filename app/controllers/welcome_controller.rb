@@ -1,7 +1,7 @@
-class WelcomeController < ApplicationController
-  include AwsSqsHelper
-  
+require 'resolv'
+
+class WelcomeController < ApplicationController 
   def index
-  	@NumeroMensajesSQS = count_messages_from_queue()
+  	@host = Resolv.getname(request.remote_ip)
   end
 end
