@@ -17,14 +17,6 @@
 	<img src="PortadaImag/Im3.jpg" class="img-circle" alt="Cinque Terre" width="350" height="236" hspace="20">
 </div>
 
-host = <%= @host %>
-<br>
-host = <%= @hostsocket %>
-<br>
-ip = <%= request.remote_ip %>
-<br>
-port = <%= request.host_with_port %>
-<br>
-ip test = <%= @iptest %>
-<br>
-ipv4 = <%= @sock1 %>
+browser = <%=
+request.env['HTTP_USER_AGENT']
+%>

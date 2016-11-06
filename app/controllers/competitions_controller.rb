@@ -10,7 +10,7 @@ class CompetitionsController < ApplicationController
   # GET /competitions
   # GET /competitions.json
   def index
-    @competitions = Competition.where(:user_id => Rails.cache.read("user_id")).all
+    @competitions = Competition.where(:user_id => Rails.cache.read("user_id" + request.remote_ip)).all
   end
 
   # GET /competitions/1
