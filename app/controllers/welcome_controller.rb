@@ -14,11 +14,11 @@ class WelcomeController < ApplicationController
 
 
 
-@sock2 = socket.ip_address_list.detect{|intf| intf.ipv4_private?}
+#@sock2 = socket.ip_address_list.detect{|intf| intf.ipv4_private?}
 
 
 
-@sock3 = socket.ip_address_list.detect{|intf| intf.ipv4? and !intf.ipv4_loopback? and !intf.ipv4_multicast? and !intf.ipv4_private?}
+#@sock3 = socket.ip_address_list.detect{|intf| intf.ipv4? and !intf.ipv4_loopback? and !intf.ipv4_multicast? and !intf.ipv4_private?}
 
 
   end
