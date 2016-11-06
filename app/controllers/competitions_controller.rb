@@ -10,7 +10,7 @@ class CompetitionsController < ApplicationController
   # GET /competitions
   # GET /competitions.json
   def index
-    @competitions = Competition.where(:user_id => session[:user_id]).all
+    @competitions = Competition.where(:user_id => Rails.cache.read("user_id")).all
   end
 
   # GET /competitions/1
@@ -36,7 +36,7 @@ class CompetitionsController < ApplicationController
 
     @image_object = params[:competition][:image_file]
     @competition = Competition.new(competition_params)
-    @competition.user_id = session[:user_id]    
+    @competition.user_id = Rails.cache.read("user_id")    
     @competition.image_original_filename = @image_object.original_filename.to_s
     @competition.image_content_type = @image_object.content_type.to_s
 
@@ -102,7 +102,7 @@ class CompetitionsController < ApplicationController
     end
 
     def authenticate_user
-      if !session[:user_id]
+      if !Rails.cache.read("user_id")
          redirect_to init_session_path
       end        
     end
