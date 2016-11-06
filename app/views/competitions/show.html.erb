@@ -58,7 +58,7 @@
 
                   <p><b>Comentario: </b><%= video.comment %> </p>
 
-                  <% if session[:user_id] %>
+                  <% if Rails.cache.read("user_id") %>
                     <%= link_to " Ver Detalles", [video.competition, video], class:"btn btn-primary active" %>
                   <br>
                   <% end %>

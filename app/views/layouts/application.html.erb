@@ -28,7 +28,7 @@
   	    		<%= link_to "Inicio", root_path, class:"btn-link" %>
   	    	</li>
 
-          <% if !session[:user_id] %>             
+          <% if !Rails.cache.read("user_id") %>             
 
               <li class="col-md no-point">
                   <%= link_to "Iniciar sesión", init_session_path, class:"btn-link" %>
