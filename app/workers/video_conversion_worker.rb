@@ -8,7 +8,9 @@ class VideoConversionWorker
 
     message_from_queue = obtain_message_from_queue[0]
 
-    if message_from_queue
+    while (message_from_queue) do
+
+    #if message_from_queue
 
       # Searching the video
       video = Video.find(message_from_queue.body)
@@ -56,6 +58,7 @@ class VideoConversionWorker
 
         end
 
+        message_from_queue = obtain_message_from_queue[0]
       end
 
   end
