@@ -3,6 +3,7 @@ require 'fileutils'
 class CompetitionsController < ApplicationController
 
   include UtilitiesHelper
+  include AwsSqsHelper
 
   before_action :set_competition, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user, except: [:show]
@@ -70,7 +71,9 @@ class CompetitionsController < ApplicationController
   # DELETE /competitions/1
   # DELETE /competitions/1.json
   def destroy
+    image_to_delete = 'images/' + @competition.id + '-' + @competition.image_original_filename
     @competition.destroy
+    delete_file_from_aws_s3(image_to_delete)
     respond_to do |format|
       format.html { redirect_to competitions_url, success: 'Concurso eliminado.' }
       format.json { head :no_content }

@@ -62,4 +62,20 @@ module AwsSqsHelper
         
 	end	
 
+
+	def delete_file_from_aws_s3(file_to_delete)
+	  s3_client = Aws::S3::Client.new(
+	    credentials: Aws::Credentials.new(ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']),
+	    region: ENV['AWS_REGION']
+	  )
+
+	  # delete object by passing bucket and object key
+	  s3_response = s3_client.delete_object({
+	    bucket: ENV['S3_BUCKET_NAME'], # required
+	    key: file_to_delete, # required
+	  })
+	end
+
+
+
 end
