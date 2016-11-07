@@ -44,7 +44,8 @@
 
            <ul>
              <% @competition_videos.each do |video| %>
-                <% if Rails.cache.read("user_id") or video.state == "Procesado" %>
+             <% session_user = request.remote_ip.to_s + request.env['HTTP_USER_AGENT'].to_s %>
+                <% if Rails.cache.read(session_user) or video.state == "Procesado" %>
                   <br><br>
                   <p><b>Fecha de publicación: </b><%= video.created_at %> </p>
                   <p><b>Autor: </b> <%= video.name_autor + " " + video.last_name_autor %> </p>
@@ -58,7 +59,7 @@
 
                   <p><b>Comentario: </b><%= video.comment %> </p>
 
-                  <% if Rails.cache.read("user_id") %>
+                  <% if Rails.cache.read(session_user) %>
                     <%= link_to " Ver Detalles", [video.competition, video], class:"btn btn-primary active" %>
                   <br>
                   <% end %>

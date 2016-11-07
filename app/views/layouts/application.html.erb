@@ -28,7 +28,8 @@
   	    		<%= link_to "Inicio", root_path, class:"btn-link" %>
   	    	</li>
 
-          <% if !Rails.cache.read("user_id") %>             
+          <% session_user = request.remote_ip.to_s + request.env['HTTP_USER_AGENT'].to_s %>
+          <% if !Rails.cache.read(session_user) %>             
 
               <li class="col-md no-point">
                   <%= link_to "Iniciar sesión", init_session_path, class:"btn-link" %>
