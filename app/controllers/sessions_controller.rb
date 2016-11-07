@@ -18,7 +18,7 @@ class SessionsController < ApplicationController
 
   def destroy
     session_user = request.remote_ip.to_s + request.env['HTTP_USER_AGENT'].to_s
-    Rails.cache.write(session_user, nil)
+    Rails.cache.delete(session_user)
     #session[:user_id] = nil
     flash[:success] = "Has cerrado sesión "
     redirect_to "/"
