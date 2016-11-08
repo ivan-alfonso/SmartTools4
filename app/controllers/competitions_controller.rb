@@ -71,9 +71,19 @@ class CompetitionsController < ApplicationController
   # DELETE /competitions/1
   # DELETE /competitions/1.json
   def destroy
+    competition_videos = Competition.find(params[:id]).videos
     image_to_delete = 'images/' + @competition.id + '-' + @competition.image_original_filename
     @competition.destroy
     delete_file_from_aws_s3(image_to_delete)
+    
+    competition_videos.each do |video|
+      video_name_without_ext = File.basename(video.video_original_filename, File.extname(video.video_original_filename))
+      video_to_delete = 'original-videos/' + video.id + '-' + video.video_original_filename
+      delete_file_from_aws_s3(video_to_delete)
+      video_to_delete = 'converted-videos/' + video.id + '-' + video_name_without_ext + '.mp4'
+      delete_file_from_aws_s3(video_to_delete)
+    end
+
     respond_to do |format|
       format.html { redirect_to competitions_url, success: 'Concurso eliminado.' }
       format.json { head :no_content }
