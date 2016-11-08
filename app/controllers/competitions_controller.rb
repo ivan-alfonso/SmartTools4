@@ -78,10 +78,11 @@ class CompetitionsController < ApplicationController
     
     competition_videos.each do |video|
       video_name_without_ext = File.basename(video.video_original_filename, File.extname(video.video_original_filename))
-      video_to_delete = 'original-videos/' + video.id + '-' + video.video_original_filename
-      delete_file_from_aws_s3(video_to_delete)
-      video_to_delete = 'converted-videos/' + video.id + '-' + video_name_without_ext + '.mp4'
-      delete_file_from_aws_s3(video_to_delete)
+      original_video_to_delete = 'converted-videos/' + video.id + '-' + video_name_without_ext + '.mp4'
+      converted_video_to_delete = 'original-videos/' + video.id + '-' + video.video_original_filename
+      video.destroy
+      delete_file_from_aws_s3(original_video_to_delete)
+      delete_file_from_aws_s3(converted_video_to_delete)
     end
 
     respond_to do |format|
